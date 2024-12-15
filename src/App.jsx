@@ -48,7 +48,7 @@ const App = () => {
   };
 
   if (!user) {
-    // Show the login screen if the user is not logged in
+    // Show the login screen
     return <Login setUser={setUser} />;
   }
 
