@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router and Routes
 import Login from './Login';
 import TweetInput from './TweetInput';
 import TweetList from './TweetList';
@@ -47,23 +48,33 @@ const App = () => {
     );
   };
 
-  if (!user) {
-    // Show the login screen
-    return <Login setUser={setUser} />;
-  }
-
   return (
-    <AppContext.Provider value={{ user, theme, setTheme }}>
-      <div className={`app ${theme}`}>
-        <Header />
-        <Sidebar />
-        <main>
-          <Profile />
-          <TweetInput addTweet={addTweet} />
-          <TweetList tweets={tweets} addRetweet={addRetweet} addTweet={addTweet} />
-        </main>
-      </div>
-    </AppContext.Provider>
+    <Router>
+      <AppContext.Provider value={{ user, setUser, theme, setTheme }}>
+        <div className={`app ${theme}`}>
+          <Header />
+          <Sidebar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                user ? (
+                  <>
+                    <main>
+                      <Profile />
+                      <TweetInput addTweet={addTweet} />
+                      <TweetList tweets={tweets} addRetweet={addRetweet} addTweet={addTweet} />
+                    </main>
+                  </>
+                ) : (
+                  <Login setUser={setUser} />
+                )
+              }
+            />
+          </Routes>
+        </div>
+      </AppContext.Provider>
+    </Router>
   );
 };
 
