@@ -3,8 +3,7 @@ import './Header.css';
 
 const Header = () => {
   return (
-    <header className="header">
-      <h1>My Twitter Clone</h1>
+    <header className="header"><h1>My Twitter Clone</h1>
     </header>
   );
 };

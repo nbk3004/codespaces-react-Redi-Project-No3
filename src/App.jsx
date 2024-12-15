@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
+import Login from './Login';
 import TweetInput from './TweetInput';
 import TweetList from './TweetList';
 import Sidebar from './Sidebar';
@@ -9,13 +10,9 @@ import './App.css';
 export const AppContext = createContext();
 
 const App = () => {
+  const [user, setUser] = useState(null); // User state starts as null
   const [tweets, setTweets] = useState([]);
-  const [user, setUser] = useState({ name: 'Nancy', profilePicture: 'src/portfolio_header.jpg' });
   const [theme, setTheme] = useState('light');
-
-  useEffect(() => {
-    // Fetch initial data from remote server, if needed
-  }, []);
 
   const addTweet = (tweet, parentTweetId = null) => {
     const newTweet = {
@@ -49,6 +46,11 @@ const App = () => {
       )
     );
   };
+
+  if (!user) {
+    // Show the login screen if the user is not logged in
+    return <Login setUser={setUser} />;
+  }
 
   return (
     <AppContext.Provider value={{ user, theme, setTheme }}>
