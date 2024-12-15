@@ -1,0 +1,42 @@
+.tweet-list {
+    margin-top: 1rem;
+  }
+  
+  .tweet {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .tweet-content {
+    margin-bottom: 0.5rem;
+  }
+  
+  .tweet-actions button {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #1da1f2;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .tweet-actions button:hover {
+    background-color: #0d8ce0;
+  }
+  
+  .timestamp {
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  .tweet-replies {
+    margin-top: 1rem;
+    border-left: 2px solid #ddd;
+    padding-left: 1rem;
+  }
+  
