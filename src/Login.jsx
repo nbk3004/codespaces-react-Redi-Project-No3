@@ -9,7 +9,7 @@ const Login = ({ setUser }) => {
     if (name.trim()) {
       setUser({
         name,
-        profilePicture: profilePicture.trim() || 'default-profile.jpg', // Fallback to default
+        profilePicture: profilePicture.trim() || 'default-profile.jpg', // use default pic 
       });
     }
   };
