@@ -16,7 +16,7 @@ const Login = ({ setUser }) => {
 
   return (
     <div className="login">
-      <h2>Welcome to Tweet App</h2>
+      <h2>Welcome to My Twitter App</h2>
       <input
         type="text"
         placeholder="Enter your name"
