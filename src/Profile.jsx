@@ -6,7 +6,7 @@ const Profile = () => {
   const { user } = useContext(AppContext);
 
   const handleImageError = (e) => {
-    e.target.src = 'default-profile.jpg'; // default pic 
+    e.target.src = 'default-profile.jpg'; // default pic
   };
 
   return (
