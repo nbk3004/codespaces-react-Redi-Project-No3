@@ -1,4 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router and Routes
+import Login from './Login';
 import TweetInput from './TweetInput';
 import TweetList from './TweetList';
 import Sidebar from './Sidebar';
@@ -9,13 +11,9 @@ import './App.css';
 export const AppContext = createContext();
 
 const App = () => {
+  const [user, setUser] = useState(null); // User state starts as null
   const [tweets, setTweets] = useState([]);
-  const [user, setUser] = useState({ name: 'Nancy', profilePicture: 'src/portfolio_header.jpg' });
   const [theme, setTheme] = useState('light');
-
-  useEffect(() => {
-    // Fetch initial data from remote server, if needed
-  }, []);
 
   const addTweet = (tweet, parentTweetId = null) => {
     const newTweet = {
@@ -51,17 +49,32 @@ const App = () => {
   };
 
   return (
-    <AppContext.Provider value={{ user, theme, setTheme }}>
-      <div className={`app ${theme}`}>
-        <Header />
-        <Sidebar />
-        <main>
-          <Profile />
-          <TweetInput addTweet={addTweet} />
-          <TweetList tweets={tweets} addRetweet={addRetweet} addTweet={addTweet} />
-        </main>
-      </div>
-    </AppContext.Provider>
+    <Router>
+      <AppContext.Provider value={{ user, setUser, theme, setTheme }}>
+        <div className={`app ${theme}`}>
+          <Header />
+          <Sidebar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                user ? (
+                  <>
+                    <main>
+                      <Profile />
+                      <TweetInput addTweet={addTweet} />
+                      <TweetList tweets={tweets} addRetweet={addRetweet} addTweet={addTweet} />
+                    </main>
+                  </>
+                ) : (
+                  <Login setUser={setUser} />
+                )
+              }
+            />
+          </Routes>
+        </div>
+      </AppContext.Provider>
+    </Router>
   );
 };
 
